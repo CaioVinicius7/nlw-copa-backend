@@ -1,0 +1,16 @@
+{
+	"name": "nlw-copa",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"dev": "tsx watch src/server.ts"
+	},
+	"devDependencies": {
+		"tsx": "^3.11.0",
+		"typescript": "^4.8.4"
+	},
+	"dependencies": {
+		"fastify": "^4.9.2"
+	}
+}
