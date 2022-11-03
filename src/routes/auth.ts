@@ -3,15 +3,20 @@ import { z } from "zod";
 import axios from "axios";
 
 import { prisma } from "../lib/prisma";
+import { authenticate } from "../plugins/authenticate";
 
 export async function authRoutes(fastify: FastifyInstance) {
-	fastify.get("/me", async (request, reply) => {
-		await request.jwtVerify();
-
-		return {
-			user: request.user
-		};
-	});
+	fastify.get(
+		"/me",
+		{
+			onRequest: [authenticate]
+		},
+		async (request, reply) => {
+			return {
+				user: request.user
+			};
+		}
+	);
 
 	fastify.post("/users", async (request, reply) => {
 		const createUserBody = z.object({
