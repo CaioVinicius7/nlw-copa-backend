@@ -5,6 +5,14 @@ import axios from "axios";
 import { prisma } from "../lib/prisma";
 
 export async function authRoutes(fastify: FastifyInstance) {
+	fastify.get("/me", async (request, reply) => {
+		await request.jwtVerify();
+
+		return {
+			user: request.user
+		};
+	});
+
 	fastify.post("/users", async (request, reply) => {
 		const createUserBody = z.object({
 			access_token: z.string()
